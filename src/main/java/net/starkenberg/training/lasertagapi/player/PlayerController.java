@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Comparator;
 import java.util.List;
 
 @CrossOrigin
@@ -26,7 +27,9 @@ public class PlayerController {
 
     @GetMapping
     public ResponseEntity<List<Player>> getPlayers() {
-        return new ResponseEntity<>(repo.findAll(), HttpStatus.OK);
+        List<Player> players = repo.findAll();
+        players.sort(Comparator.comparing(Player::getId));
+        return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
@@ -41,9 +44,7 @@ public class PlayerController {
     }
 
     @PostMapping
-    public ResponseEntity<Player> newPlayer(@RequestBody PlayerForm playerForm, UriComponentsBuilder uriBuilder) {
-        Player player = new Player();
-        player.setCodeName(playerForm.getCodeName());
+    public ResponseEntity<Player> newPlayer(@RequestBody Player player, UriComponentsBuilder uriBuilder) {
         player = repo.save(player);
         return ResponseEntity.created(
                 uriBuilder.path("/player/{id}").buildAndExpand(player.getId()).toUri()).build();
