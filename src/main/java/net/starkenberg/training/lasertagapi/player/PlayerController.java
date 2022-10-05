@@ -33,8 +33,8 @@ public class PlayerController {
     }
 
     @GetMapping(path = "/{id}")
-    public Player getById(@PathVariable String id) {
-        return repo.getReferenceById(Long.valueOf(id));
+    public ResponseEntity<Player> getById(@PathVariable String id) {
+        return new ResponseEntity<>(repo.getReferenceById(Long.valueOf(id)),HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
@@ -47,7 +47,7 @@ public class PlayerController {
     public ResponseEntity<Player> newPlayer(@RequestBody Player player, UriComponentsBuilder uriBuilder) {
         player = repo.save(player);
         return ResponseEntity.created(
-                uriBuilder.path("/player/{id}").buildAndExpand(player.getId()).toUri()).build();
+                uriBuilder.path("/players/{id}").buildAndExpand(player.getId()).toUri()).build();
     }
 
 }
