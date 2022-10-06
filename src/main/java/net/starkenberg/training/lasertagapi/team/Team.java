@@ -7,7 +7,7 @@ import net.starkenberg.training.lasertagapi.player.Player;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Data
@@ -18,6 +18,6 @@ public class Team {
     private Long id;
     @Column(length = 30, unique = true)
     private String name;
-    @OneToMany
+    @ManyToMany
     List<Player> players;
 }

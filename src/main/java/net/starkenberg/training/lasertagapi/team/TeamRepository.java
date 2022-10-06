@@ -11,4 +11,7 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @Override
     @Query(value = "SELECT DISTINCT t FROM Team t LEFT JOIN FETCH t.players")
     List<Team> findAll();
+
+    @Query(value = "SELECT DISTINCT t FROM Team t LEFT JOIN FETCH t.players WHERE t.id = :id")
+    Team findTeamById(Long id);
 }

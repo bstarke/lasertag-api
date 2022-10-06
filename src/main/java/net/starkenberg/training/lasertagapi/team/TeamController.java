@@ -34,7 +34,7 @@ public class TeamController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Team> getTeamById(@PathVariable String id) {
-        return new ResponseEntity<>(repo.getReferenceById(Long.valueOf(id)), HttpStatus.OK);
+        return new ResponseEntity<>(repo.findTeamById(Long.valueOf(id)), HttpStatus.OK);
     }
 
     @PostMapping
@@ -46,7 +46,7 @@ public class TeamController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<Team> updateTeam(@PathVariable String id, @RequestBody Team team) {
-        if (team.getId() == Long.valueOf(id)) {
+        if (team.getId().equals(Long.valueOf(id))) {
             repo.save(team);
             return new ResponseEntity<>(team, HttpStatus.OK);
         } else {
