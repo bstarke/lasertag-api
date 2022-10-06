@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "laser"
+      POSTGRES_USER: "lasertag"
+      POSTGRES_PASSWORD: "L@s3rT@g"
+
+  api:
+    image: "lasertag-api:0.0.1-SNAPSHOT"
+    restart: "always"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://db:5432/laser"
+      SPRING_DATASOURCE_USERNAME: "lasertag"
+      SPRING_DATASOURCE_PASSWORD: "L@s3rT@g"
+    ports:
+    - "8080:8080"
+    depends_on:
+    - db
