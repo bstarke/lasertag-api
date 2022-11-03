@@ -1,6 +1,7 @@
 package net.starkenberg.training.lasertagapi.game;
 
 import lombok.SneakyThrows;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.nio.ByteBuffer;
 
+@Service
 public class UdpServer extends Thread {
     private final DatagramSocket incomingSocket;
     private final DatagramSocket outgoingSocket;
