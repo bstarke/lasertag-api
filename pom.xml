@@ -36,11 +36,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.11</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -82,7 +82,7 @@
                     <image>
                         <builder>paketobuildpacks/builder:tiny</builder>
                         <env>
-                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+                            <BP_NATIVE_IMAGE>false</BP_NATIVE_IMAGE>
                         </env>
                     </image>
                 </configuration>
