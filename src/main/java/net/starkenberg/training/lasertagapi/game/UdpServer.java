@@ -2,6 +2,7 @@ package net.starkenberg.training.lasertagapi.game;
 
 import lombok.SneakyThrows;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -12,14 +13,22 @@ import java.nio.ByteBuffer;
 public class UdpServer extends Thread {
     private final DatagramSocket incomingSocket;
     private final DatagramSocket outgoingSocket;
+    private final Game game;
     private boolean running;
     private byte[] inbound = new byte[256];
     private byte[] outbound = new byte[256];
 
-    public UdpServer() throws SocketException {
+    public UdpServer(Game game) throws SocketException {
+        this.game = game;
         outgoingSocket = new DatagramSocket(7500);
         incomingSocket = new DatagramSocket(7501);
     }
+
+    @PostConstruct
+    public void init() {
+        this.start();
+    }
+
 
     @SneakyThrows
     public void run() {
