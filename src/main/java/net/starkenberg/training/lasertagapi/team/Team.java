@@ -11,13 +11,8 @@ import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Data
-@Entity
 public class Team {
-    @Id
-    @Column(unique = true)
-    private Long id;
-    @Column(length = 30, unique = true)
     private String name;
-    @ManyToMany
+    private int score;
     List<Player> players;
 }
